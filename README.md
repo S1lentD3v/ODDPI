@@ -235,6 +235,20 @@ ODDPI only changes the settings of the Raw Accel driver; it doesn't run anything
 itself. Raw Accel is Microsoft-signed and widely used. As with any input software, check your
 game's rules; you use it at your own risk.
 
+**Windows says "Windows protected your PC". Is it safe?**
+That blue SmartScreen box appears for programs that aren't code-signed. Signing certificates cost
+hundreds per year, so most small open-source tools don't have one. It doesn't mean anything was
+detected. Click **More info**, then **Run anyway**. You only need to do this once per exe.
+
+To check your download is genuine, compare its SHA-256 with the one on the release page. In
+PowerShell, in the folder you downloaded to:
+
+```
+Get-FileHash .\ODDPI-v1.0.0-win-x64.zip
+```
+
+You can also build it yourself from this source code (see [Building](#building)).
+
 **How do I turn it off?**
 Click the **ODDPI on/off** switch, or run `oddpi off`. `oddpi restore original` returns the driver to
 exactly how it was before you first used ODDPI.
