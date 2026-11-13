@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="OpenSource ODDPI (OmnidirectionalDPI)/OpenSource ODDPI (OmnidirectionalDPI).vcxproj" Id="758ae2ac-e569-46f8-9158-3af01fe7a6f6" />
+  <Project Path="OpenSource ODDPI (OmnidirectionalDPI)/oddpi-gui.vcxproj" Id="4f1c2a9e-7b3d-4e58-9a61-2c8d5e0b7f13" />
+</Solution>
