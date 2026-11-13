@@ -228,6 +228,38 @@ The driver copies settings byte-for-byte, so ODDPI is built against the exact Ra
 (`third_party/rawaccel`, v1.7.0). If the installed driver's layout differs, ODDPI detects it and
 refuses to write.
 
+## Virus scans
+
+Both exes in the [v1.0.0 release](https://github.com/S1lentD3v/ODDPI/releases/tag/v1.0.0) were scanned on VirusTotal, and **no security vendor flagged either one**:
+
+| File | Result | SHA-256 |
+|---|---|---|
+| `oddpi-gui.exe` | [**0/70** engines](https://www.virustotal.com/gui/file/0b07f171daa26a451f5260eabbb6e11629e89acc2514f972616d82e162294af5/detection) | `0b07f171daa26a451f5260eabbb6e11629e89acc2514f972616d82e162294af5` |
+| `oddpi.exe` | [**0/71** engines](https://www.virustotal.com/gui/file/c3ad79685ed41a91fa897f292ef40a38605458c24a92473c02b518b84a1c4259/detection) | `c3ad79685ed41a91fa897f292ef40a38605458c24a92473c02b518b84a1c4259` |
+
+In the sandbox run, ODDPI made **no network connections**, matched **no IDS or Sigma rules**, and
+only created its own `oddpi.ini`.
+
+### About the "Behavior" tab
+
+VirusTotal lists every MITRE ATT&CK technique a program *resembles*, and normal apps match many.
+All of ODDPI's are rated Info/Low:
+
+| Shown as | What ODDPI is actually doing |
+|---|---|
+| Input Capture | Reads raw mouse movement during the aim tests only. No keyboard, no hooks, nothing injected. |
+| Screen Capture | Draws its own 3D scene to its own window (`BitBlt`). It never reads your screen. |
+| Shared Modules / Hijack Execution Flow | Loads standard Windows DLLs; Windows checks the app folder first (e.g. `DWrite.dll`). ODDPI ships no DLLs. |
+| File & Directory / System Discovery | Looks for its own `oddpi.ini`, `games.ini` and `%LOCALAPPDATA%\ODDPI`; reads language and theme settings. |
+| Obfuscated | Optimised, statically linked code. Nothing is packed or encrypted. |
+| Process Injection / Application Layer Protocol / Masquerading / Subvert Trust Controls | Generic pattern matches. ODDPI has no networking code, never touches other processes, and is unsigned. The sandbox renames every sample `file.exe`. |
+
+Registry access is read-only (language, fonts, dark/light theme). The only thing ODDPI changes
+outside its own files is Raw Accel's settings, through Raw Accel's official interface, when you
+click **Apply**.
+
+The full source code is here, so you can check all of this or build the exes yourself (see [Building](#building)).
+
 ## FAQ
 
 **Is it safe with anti-cheat?**
