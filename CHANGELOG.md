@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.0 (2026-11-13)
+
+### Added
+- `uninstaller.exe`: a checklist that removes ODDPI's program files and your settings/data, and turns ODDPI off in the driver (other Raw Accel profiles are kept)
+- Optional in the uninstaller: remove the **Raw Accel driver** and its registry entries (mouse filter, service, driver file; needs admin and a restart) and the **Raw Accel program folder**. This also cleans up the `rawaccel` service key that Raw Accel's own uninstaller leaves behind.
+
 ## v1.0.0 (2026-11-13)
 
 First public release.

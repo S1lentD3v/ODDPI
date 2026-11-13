@@ -4,4 +4,5 @@
   </Configurations>
   <Project Path="OpenSource ODDPI (OmnidirectionalDPI)/OpenSource ODDPI (OmnidirectionalDPI).vcxproj" Id="758ae2ac-e569-46f8-9158-3af01fe7a6f6" />
   <Project Path="OpenSource ODDPI (OmnidirectionalDPI)/oddpi-gui.vcxproj" Id="4f1c2a9e-7b3d-4e58-9a61-2c8d5e0b7f13" />
+  <Project Path="OpenSource ODDPI (OmnidirectionalDPI)/oddpi-uninstaller.vcxproj" Id="9b2e6d41-3c7a-4f85-b1d2-6e0a8c4f5d27" />
 </Solution>

@@ -256,7 +256,8 @@ All of ODDPI's are rated Info/Low:
 
 Registry access is read-only (language, fonts, dark/light theme). The only thing ODDPI changes
 outside its own files is Raw Accel's settings, through Raw Accel's official interface, when you
-click **Apply**.
+click **Apply**. The one exception is `uninstaller.exe`, and only if you tick **Raw Accel driver**:
+it then asks for admin and removes Raw Accel's registry entries (see [Uninstalling](#uninstalling)).
 
 The full source code is here, so you can check all of this or build the exes yourself (see [Building](#building)).
 
@@ -276,7 +277,7 @@ To check your download is genuine, compare its SHA-256 with the one on the relea
 PowerShell, in the folder you downloaded to:
 
 ```
-Get-FileHash .\ODDPI-v1.0.0-win-x64.zip
+Get-FileHash .\ODDPI-v1.1.0-win-x64.zip
 ```
 
 You can also build it yourself from this source code (see [Building](#building)).
@@ -289,6 +290,23 @@ exactly how it was before you first used ODDPI.
 Settings live in `oddpi.ini` next to the exe. Backups, calibration logs and Gridshot history are
 in `%LOCALAPPDATA%\ODDPI`. Nothing is sent anywhere.
 
+## Uninstalling
+
+Run `uninstaller.exe` from the ODDPI folder and tick what to remove:
+
+| Option | Default | What it removes |
+|---|---|---|
+| Turn ODDPI off in the driver | always | ODDPI's profile in Raw Accel (your other Raw Accel profiles stay) |
+| ODDPI program files | on | `oddpi.exe`, `oddpi-gui.exe`, the uninstaller and readme files (the folder too, if it's then empty) |
+| ODDPI settings and data | on | `oddpi.ini`, `games.ini`, `%LOCALAPPDATA%\ODDPI` |
+| Raw Accel driver | off | `rawaccel` in the mouse class `UpperFilters`, the `rawaccel` service key, and `System32\drivers\rawaccel.sys` (deleted at restart). Needs admin and a restart. |
+| Raw Accel program folder | off | The Raw Accel folder, if one is found |
+
+The driver removal does what Raw Accel's own `uninstaller.exe` does, then also deletes the
+`rawaccel` service key that Raw Accel's uninstaller leaves behind. For safety, the driver file and
+service are only removed once `rawaccel` is gone from every mouse filter list. A filter entry
+pointing at a missing driver would stop the mouse working.
+
 ## Building
 
 Visual Studio 2026 (v145 toolset). Open `OpenSource ODDPI (OmnidirectionalDPI).slnx` and build
@@ -298,7 +316,7 @@ Visual Studio 2026 (v145 toolset). Open `OpenSource ODDPI (OmnidirectionalDPI).s
 msbuild "OpenSource ODDPI (OmnidirectionalDPI).slnx" /p:Configuration=Release /p:Platform=x64
 ```
 
-The output goes to `x64\Release\` (`oddpi.exe` and `oddpi-gui.exe`). Release builds link the C++
+The output goes to `x64\Release\` (`oddpi.exe`, `oddpi-gui.exe` and `uninstaller.exe`). Release builds link the C++
 runtime statically, so the exes run without the Visual C++ Redistributable.
 
 Self-tests (simulated players, no mouse needed): `oddpi selftest`, `oddpi selftest3d`,
